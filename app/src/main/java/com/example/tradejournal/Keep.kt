@@ -1,1 +1,1 @@
-package
+com.example.tradejournal
