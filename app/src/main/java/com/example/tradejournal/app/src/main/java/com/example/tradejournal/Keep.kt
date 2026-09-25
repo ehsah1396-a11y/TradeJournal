@@ -1,1 +1,1 @@
- com.example.tradejournal
+package com.example.tradejournal
