@@ -3,11 +3,18 @@
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="com.farsitel.bazaar.permission.PAY_THIRD_PARTY" />
+    <uses-permission android:name="com.farsitel.bazaar.permission.PAY_THROUGH_BAZAAR" />
     <uses-permission android:name="ir.mservices.market.BILLING" />
     <uses-feature android:name="android.hardware.microphone" android:required="false" />
     <queries>
         <package android:name="com.farsitel.bazaar" />
         <package android:name="ir.mservices.market" />
+        <intent>
+            <action android:name="ir.cafebazaar.pardakht.InAppBillingService.BIND" />
+        </intent>
+        <intent>
+            <action android:name="ir.mservices.market.InAppBillingService.BIND" />
+        </intent>
     </queries>
     <application
         android:allowBackup="true"
