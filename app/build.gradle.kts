@@ -5,6 +5,11 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
+val ksPath = System.getenv("KEYSTORE_PATH")
+val ksPass = System.getenv("KEYSTORE_PASSWORD")
+val ksAlias = System.getenv("KEY_ALIAS")
+val ksKeyPass = System.getenv("KEY_PASSWORD")
+
 android {
     namespace = "com.example.tradejournal"
     compileSdk = 34
@@ -16,8 +21,23 @@ android {
         versionCode = 1
         versionName = "0.1"
     }
+
+    signingConfigs {
+        if (ksPath != null) {
+            create("release") {
+                storeFile = file(ksPath)
+                storePassword = ksPass
+                keyAlias = ksAlias
+                keyPassword = ksKeyPass
+            }
+        }
+    }
+
     buildTypes {
-        release { isMinifyEnabled = false }
+        release {
+            isMinifyEnabled = false
+            if (ksPath != null) signingConfig = signingConfigs.getByName("release")
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -26,7 +46,7 @@ android {
     kotlinOptions { jvmTarget = "17" }
     buildFeatures {
         compose = true
-        aidl = true   // برای IInAppBillingService.aidl (بخش خرید پرو از بازار/مایکت) لازم است
+        aidl = true
     }
 }
 
